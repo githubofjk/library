@@ -23,7 +23,7 @@ function displayMyLibraryBooks() {
 
   myLibrary.forEach((book) => {
     const divBook = document.createElement("div");
-    divBook.textContent = `${book["name"]} ${book["author"]} ${book["pages"]} ${book["read"]}`;
+    divBook.textContent = book.info();
     library.appendChild(divBook);
   });
 }
