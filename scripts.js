@@ -1,34 +1,52 @@
+const btnNewBook = document.querySelector("#btnNewBook");
+const btnSubmit = document.querySelector('[type="submit"]')
+
 let myLibrary = [];
 
 function Book(name, author, pages, read) {
-    this.name = name
-    this.author = author
-    this.pages = pages
-    this.read = read
-    this.info = function() {
-        return `${name} by ${author}, ${pages} pages, ${read}`;
-    }
+  this.name = name;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+  this.info = function () {
+    return `${name} by ${author}, ${pages} pages, ${read}`;
+  };
 }
 
 function addBookToLibrary(name, author, pages, read) {
-    let newBook = new Book(name, author, pages, read);
-    myLibrary.push(newBook);
-    let newBook2 = new Book("LOTR", "JR", "567", "false");
-    myLibrary.push(newBook2);
+  let newBook = new Book(name, author, pages, read);
+  myLibrary.push(newBook);
 }
 
 function displayMyLibraryBooks() {
-    const library = document.querySelector("#library");
+  const library = document.querySelector("#library");
+
+  myLibrary.forEach((book) => {
+    const divBook = document.createElement("div");
+    divBook.textContent = `${book["name"]} ${book["author"]} ${book["pages"]} ${book["read"]}`;
+    library.appendChild(divBook);
+  });
+}
+
+function newBook() {
+  btnNewBook.setAttribute("style", `background-color: green;`);
+  // TODO show form for fnew book
+}
+
+function submitForm() {
+    const name = document.querySelectorAll("input")[0].value;
+    const author = document.querySelectorAll("input")[1].value;
+    const pages = document.querySelectorAll("input")[2].value;
+    const read = document.querySelectorAll("input")[3].value;
     
-    myLibrary.forEach((book) => {
-        const divBook = document.createElement('div');
-        console.log(book);
-        divBook.textContent = `${book["name"]} ${book["author"]} ${book["pages"]} ${book["read"]}`;
-        library.appendChild(divBook);
-    });
+    addBookToLibrary(name, author, pages, read);
+    displayMyLibraryBooks();
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    addBookToLibrary("Hobbit", "JR", "234", "false");
-    displayMyLibraryBooks();
+  addBookToLibrary("Hobbit", "JR", "234", "false");
+  displayMyLibraryBooks();
 });
+
+btnNewBook.addEventListener("click", newBook);
+btnSubmit.addEventListener("click", submitForm);
