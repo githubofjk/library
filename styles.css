@@ -1,0 +1,7 @@
+.submitNewBookHidden {
+    display: none;
+}
+
+.submitNewBookShow {
+    display: block;
+}

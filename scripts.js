@@ -1,5 +1,6 @@
 const btnNewBook = document.querySelector("#btnNewBook");
 const btnSubmit = document.querySelector("#btnSubmit");
+const formSubmitNewBook = document.querySelector("#submitNewBook");
 
 let myLibrary = [];
 
@@ -29,8 +30,7 @@ function displayMyLibraryBooks() {
 }
 
 function newBook() {
-  btnNewBook.setAttribute("style", `background-color: green;`);
-  // TODO show form for fnew book
+  formSubmitNewBook.classList.remove("submitNewBookHidden");
 }
 
 function submitForm() {
@@ -41,6 +41,9 @@ function submitForm() {
     
     addBookToLibrary(name, author, pages, read);
     displayMyLibraryBooks();
+    formSubmitNewBook.reset();
+    formSubmitNewBook.classList.add("submitNewBookHidden");
+
 }
 
 btnNewBook.addEventListener("click", newBook);
