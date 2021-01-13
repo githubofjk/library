@@ -1,5 +1,5 @@
 const btnNewBook = document.querySelector("#btnNewBook");
-const btnSubmit = document.querySelector('[type="submit"]')
+const btnSubmit = document.querySelector("#btnSubmit");
 
 let myLibrary = [];
 
@@ -42,11 +42,6 @@ function submitForm() {
     addBookToLibrary(name, author, pages, read);
     displayMyLibraryBooks();
 }
-
-window.addEventListener("DOMContentLoaded", () => {
-  addBookToLibrary("Hobbit", "JR", "234", "false");
-  displayMyLibraryBooks();
-});
 
 btnNewBook.addEventListener("click", newBook);
 btnSubmit.addEventListener("click", submitForm);
