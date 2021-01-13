@@ -1,3 +1,7 @@
+.btnRemove {
+    color: red;
+}
+
 .submitNewBookHidden {
     display: none;
 }
