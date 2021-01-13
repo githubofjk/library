@@ -22,7 +22,7 @@ function addBookToLibrary(name, author, pages, read) {
 }
 
 function displayMyLibrary() {
-
+  /*
   // assumes only new books, only entered one at a time
   const btnRemoveBook = document.createElement("button");
   btnRemoveBook.textContent = "Remove";
@@ -34,20 +34,32 @@ function displayMyLibrary() {
   divBook.dataset.index = myLibraryIndex;
   myLibraryIndex++;
   library.appendChild(divBook);
+
   divBook.appendChild(btnRemoveBook);
 
   let btnAllRemove = Array.from(document.querySelectorAll(".btnRemove"));
   btnAllRemove.forEach(btnRemoveItem => btnRemoveItem.addEventListener('click', removeBookFromLibrary));
+*/
 
-/*
-  // display entire array each time
   myLibrary.forEach((book, i) => {
+    const btnRemoveBook = document.createElement("button");
     const divBook = document.createElement("div");
+
+    btnRemoveBook.textContent = "Remove";
+    btnRemoveBook.dataset.index = i;
+    btnRemoveBook.classList.add("btnRemove");
+
     divBook.textContent = book.info();
     divBook.dataset.index = i;
+    divBook.appendChild(btnRemoveBook);
+
     library.appendChild(divBook);
   });
-  */
+
+  let btnAllRemove = Array.from(document.querySelectorAll(".btnRemove"));
+  btnAllRemove.forEach((btnRemoveItem) =>
+    btnRemoveItem.addEventListener("click", removeBookFromLibrary)
+  );
 }
 
 function newBook() {
@@ -55,20 +67,22 @@ function newBook() {
 }
 
 function removeBookFromLibrary(e) {
+  console.log(myLibrary);
   console.log(e.target);
+  myLibrary.splice(e.target.dataset.index, 1);
+  console.log(myLibrary);
 }
 
 function submitForm() {
-    const name = document.querySelectorAll("input")[0].value;
-    const author = document.querySelectorAll("input")[1].value;
-    const pages = document.querySelectorAll("input")[2].value;
-    const read = document.querySelectorAll("input")[3].value;
-    
-    addBookToLibrary(name, author, pages, read);
-    displayMyLibrary();
-    formSubmitNewBook.reset();
-    formSubmitNewBook.classList.add("submitNewBookHidden");
+  const name = document.querySelectorAll("input")[0].value;
+  const author = document.querySelectorAll("input")[1].value;
+  const pages = document.querySelectorAll("input")[2].value;
+  const read = document.querySelectorAll("input")[3].value;
 
+  addBookToLibrary(name, author, pages, read);
+  displayMyLibrary();
+  formSubmitNewBook.reset();
+  formSubmitNewBook.classList.add("submitNewBookHidden");
 }
 
 btnNewBook.addEventListener("click", newBook);
