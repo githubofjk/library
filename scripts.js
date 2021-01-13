@@ -22,25 +22,6 @@ function addBookToLibrary(name, author, pages, read) {
 }
 
 function displayMyLibrary() {
-  /*
-  // assumes only new books, only entered one at a time
-  const btnRemoveBook = document.createElement("button");
-  btnRemoveBook.textContent = "Remove";
-  btnRemoveBook.dataset.index = myLibraryIndex;
-  btnRemoveBook.classList.add("btnRemove");
-  
-  const divBook = document.createElement("div");
-  divBook.textContent = myLibrary[myLibraryIndex].info();
-  divBook.dataset.index = myLibraryIndex;
-  myLibraryIndex++;
-  library.appendChild(divBook);
-
-  divBook.appendChild(btnRemoveBook);
-
-  let btnAllRemove = Array.from(document.querySelectorAll(".btnRemove"));
-  btnAllRemove.forEach(btnRemoveItem => btnRemoveItem.addEventListener('click', removeBookFromLibrary));
-*/
-
   myLibrary.forEach((book, i) => {
     const btnRemoveBook = document.createElement("button");
     const divBook = document.createElement("div");
@@ -51,6 +32,7 @@ function displayMyLibrary() {
 
     divBook.textContent = book.info();
     divBook.dataset.index = i;
+    divBook.classList.add("bookLibrary");
     divBook.appendChild(btnRemoveBook);
 
     library.appendChild(divBook);
@@ -67,10 +49,13 @@ function newBook() {
 }
 
 function removeBookFromLibrary(e) {
-  console.log(myLibrary);
-  console.log(e.target);
   myLibrary.splice(e.target.dataset.index, 1);
-  console.log(myLibrary);
+}
+
+function resetDisplayMyLibrary (parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  };
 }
 
 function submitForm() {
@@ -80,6 +65,7 @@ function submitForm() {
   const read = document.querySelectorAll("input")[3].value;
 
   addBookToLibrary(name, author, pages, read);
+  resetDisplayMyLibrary(library);
   displayMyLibrary();
   formSubmitNewBook.reset();
   formSubmitNewBook.classList.add("submitNewBookHidden");
