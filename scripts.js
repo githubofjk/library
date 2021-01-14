@@ -4,7 +4,6 @@ const formSubmitNewBook = document.querySelector("#submitNewBook");
 const library = document.querySelector("#library");
 
 let myLibrary = [];
-let myLibraryIndex = 0;
 
 function Book(name, author, pages, read) {
   this.name = name;
@@ -23,8 +22,6 @@ function addBookToLibrary(name, author, pages, read) {
 }
 
 function bookReadToggle (e) {
-  console.log(myLibrary[e.target.dataset.index]);
-
   if (myLibrary[e.target.dataset.index].read === "false") {
     myLibrary[e.target.dataset.index].read = "true";
   }
