@@ -40,7 +40,10 @@ function displayMyLibrary() {
 
   let btnAllRemove = Array.from(document.querySelectorAll(".btnRemove"));
   btnAllRemove.forEach((btnRemoveItem) =>
-    btnRemoveItem.addEventListener("click", removeBookFromLibrary)
+    btnRemoveItem.addEventListener("click", (e) => {
+      removeBookMyLibrary(e);
+      removeBookFromLibrary(e);
+    })
   );
 }
 
@@ -49,12 +52,20 @@ function newBook() {
 }
 
 function removeBookFromLibrary(e) {
+  library.removeChild(library.childNodes[e.target.dataset.index]);
+
+  // reset btnRemove data-indexes
+  resetDisplayMyLibrary();
+  displayMyLibrary();
+}
+
+function removeBookMyLibrary (e) {
   myLibrary.splice(e.target.dataset.index, 1);
 }
 
-function resetDisplayMyLibrary (parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
+function resetDisplayMyLibrary() {
+  while (library.firstChild) {
+    library.removeChild(library.firstChild);
   };
 }
 
@@ -65,7 +76,7 @@ function submitForm() {
   const read = document.querySelectorAll("input")[3].value;
 
   addBookToLibrary(name, author, pages, read);
-  resetDisplayMyLibrary(library);
+  resetDisplayMyLibrary(); // otherwise library will show duplicate books
   displayMyLibrary();
   formSubmitNewBook.reset();
   formSubmitNewBook.classList.add("submitNewBookHidden");
