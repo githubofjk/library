@@ -94,6 +94,7 @@ function resetDisplayMyLibrary() {
   while (library.firstChild) {
     library.removeChild(library.firstChild);
   };
+  library.textContent = "Library";
 }
 
 function submitForm() {
