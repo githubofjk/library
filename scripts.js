@@ -11,14 +11,29 @@ function Book(name, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = function () {
-    return `${name} by ${author}, ${pages} pages, ${read}`;
-  };
+}
+
+Book.prototype.info = function () {
+  return `${this.name} by ${this.author}, ${this.pages} pages, ${this.read}`;
 }
 
 function addBookToLibrary(name, author, pages, read) {
   let newBook = new Book(name, author, pages, read);
   myLibrary.push(newBook);
+}
+
+function bookReadToggle (e) {
+  console.log(myLibrary[e.target.dataset.index]);
+
+  if (myLibrary[e.target.dataset.index].read === "false") {
+    myLibrary[e.target.dataset.index].read = "true";
+  }
+  else {
+    myLibrary[e.target.dataset.index].read = "false";
+  }
+  
+  resetDisplayMyLibrary();
+  displayMyLibrary();
 }
 
 function displayMyLibrary() {
@@ -27,7 +42,7 @@ function displayMyLibrary() {
     const btnRemoveBook = document.createElement("button");
     const divBook = document.createElement("div");
 
-    btnRead.textContent = "Read?";
+    btnRead.textContent = "Read Toggle";
     btnRead.dataset.index = i;
     btnRead.classList.add("btnRead");
 
