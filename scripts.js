@@ -23,8 +23,13 @@ function addBookToLibrary(name, author, pages, read) {
 
 function displayMyLibrary() {
   myLibrary.forEach((book, i) => {
+    const btnRead = document.createElement("button");
     const btnRemoveBook = document.createElement("button");
     const divBook = document.createElement("div");
+
+    btnRead.textContent = "Read?";
+    btnRead.dataset.index = i;
+    btnRead.classList.add("btnRead");
 
     btnRemoveBook.textContent = "Remove";
     btnRemoveBook.dataset.index = i;
@@ -33,10 +38,17 @@ function displayMyLibrary() {
     divBook.textContent = book.info();
     divBook.dataset.index = i;
     divBook.classList.add("bookLibrary");
+
     divBook.appendChild(btnRemoveBook);
+    divBook.appendChild(btnRead);
 
     library.appendChild(divBook);
   });
+
+  let btnRead = Array.from(document.querySelectorAll(".btnRead"));
+  btnRead.forEach((btnReadItem) =>
+    btnReadItem.addEventListener("click", bookReadToggle)
+  );
 
   let btnAllRemove = Array.from(document.querySelectorAll(".btnRemove"));
   btnAllRemove.forEach((btnRemoveItem) =>

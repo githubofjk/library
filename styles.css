@@ -3,6 +3,10 @@
     border-style: solid;
 }
 
+.btnRead {
+    color: red;
+}
+
 .btnRemove {
     color: red;
 }
